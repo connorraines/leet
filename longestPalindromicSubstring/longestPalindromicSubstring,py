@@ -1,0 +1,23 @@
+def longestPalindrome(s):
+    res = ""
+    for i in range(len(s)):
+        # Odd length palindrome
+        tmp = expand(s, i, i)
+        if len(tmp) > len(res):
+            res = tmp
+        # Even length palindrome
+        tmp = expand(s, i, i+1)
+        if len(tmp) > len(res):
+            res = tmp
+    return res
+
+def expand(s, left, right):
+    while left >= 0 and right < len(s) and s[left] == s[right]:
+        left -= 1
+        right += 1
+    return s[left+1:right]
+
+# test case
+s = "babad"
+solution = longestPalindrome(s)
+print(solution)  # Output: "bab" or "aba"
